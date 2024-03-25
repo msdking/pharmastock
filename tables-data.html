@@ -427,8 +427,13 @@
       <input type="text" id="Fname" name="Fname"><br>
       <label for="name">Last Name:</label>
       <input type="text" id="Lname" name="Lname"><br>
-      <label for="type">Type:</label>
-      <input type="text" id="type" name="type"><br>
+      <label for="type">Type:</label><br>
+      <input type="radio" id="type" name="type" value="admin">
+      <label for="admin">Admin</label><br>
+      <input type="radio" id="type" name="type" value="manager">
+      <label for="manager">Gestionnaire</label><br>
+      <input type="radio" id="type" name="type" value="client">
+      <label for="client">Client</label><br>
       <label for="dateofbirth">date of birth:</label>
       <input type="date" id="dateofbirth" name="dateofbirth"><br>
       <button type="button" onclick="addProduct()">Add</button>
@@ -436,7 +441,31 @@
   </div>
 </div>
 
-
+<!-- Modal for editing a product -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('editModal').style.display = 'none'">&times;</span>
+    <form id="editProductForm">
+      <label for="editId">ID:</label>
+      <input type="text" id="editId" name="editId"><br>
+      <label for="editFname">First Name:</label>
+      <input type="text" id="editFname" name="editFname"><br>
+      <label for="editLname">Last Name:</label>
+      <input type="text" id="editLname" name="editLname"><br>
+      <label for="editType">Type:</label>
+      <input type="radio" id="type" name="type" value="admin">
+      <label for="admin">Admin</label><br>
+      <input type="radio" id="type" name="type" value="manager">
+      <label for="manager">Gestionnaire</label><br>
+      <input type="radio" id="type" name="type" value="client">
+      <label for="client">Client</label><br>
+      <label for="editDateofbirth">Date OF Birth:</label>
+      <input type="date" id="editDateofbirth" name="editDateofbirth"><br>
+      <button type="button" onclick="saveChanges()">Save Changes</button>
+      <button type="button" onclick="document.getElementById('editModal').style.display = 'none'">Cancel</button>
+    </form>
+  </div>
+</div>
 
 
 
@@ -469,21 +498,22 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script>
+  
     function openModal() {
       document.getElementById("myModal").style.display = "block";
     }
-
+  
     function closeModal() {
       document.getElementById("myModal").style.display = "none";
     }
-
+  
     function addProduct() {
       let id = document.getElementById("id").value;
       let Fname = document.getElementById("Fname").value;
-      let Lname =  document.getElementById("Lname").value;
-      let type =  document.getElementById("type").value;
-      let dateofbirth = document.getElementById("dateofbirth").value;
-
+      let Lname = document.getElementById("Lname").value;
+      let type = document.querySelector('input[name="type"]:checked').value;
+      let dateofbirth = document.getElementById("dateofbirth").value;  
+  
       let table = document.getElementById("productTable");
       let row = table.insertRow(-1);
       let cell1 = row.insertCell(0);
@@ -491,15 +521,48 @@
       let cell3 = row.insertCell(2);
       let cell4 = row.insertCell(3);
       let cell5 = row.insertCell(4);
+      let cell6 = row.insertCell(5); // Modifier button
+      let cell7 = row.insertCell(6); // Supprimer button
       cell1.innerHTML = id;
       cell2.innerHTML = Fname;
       cell3.innerHTML = Lname;
       cell4.innerHTML = type;
       cell5.innerHTML = dateofbirth;
-
+      cell6.innerHTML = '<button class="btn btn-primary" onclick="editRow(this)">Modifier</button>';
+      cell7.innerHTML = '<button class="btn btn-danger" onclick="deleteRow(this)"">Supprimer</button>';
       closeModal();
     }
+  
+    function deleteRow(row) {
+      let i = row.parentNode.parentNode.rowIndex;
+      document.getElementById("productTable").deleteRow(i);
+    }
+  
+    function editRow(row) {
+      let cells = row.parentNode.parentNode.cells;
+      let id = cells[0].innerHTML;
+      let Fname = cells[1].innerHTML;
+      let Lname = cells[2].innerHTML;
+      let type = cells[3].innerHTML;
+      let dateofbirth = cells[4].innerHTML;
+  
+      // Afficher les informations dans la fenêtre modale pour édition
+      document.getElementById("editId").value = id;
+      document.getElementById("editFname").value = Fname;
+      document.getElementById("editLname").value = Lname;
+      document.querySelector('input[name="type"]:checked').value = type;
+      document.getElementById("editDateofbirth").value = dateofbirth;
+  
+      // Afficher la fenêtre modale pour édition
+      document.getElementById("editModal").style.display = "block";
+    }
+  
+    function saveChanges() {
+      // Logique pour enregistrer les modifications
+      document.getElementById("editModal").style.display = "none";
+    }
   </script>
+  
 </body>
 
 </html>
