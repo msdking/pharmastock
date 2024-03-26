@@ -8,16 +8,19 @@ use App\Models\Gestionnaire;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        \Log::info($credentials); // Log credentials to check if they are correct
 
-        if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('dashboard');
-        }
+public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+    $user = Gestionnaire::where('email', $credentials['email'])->first();
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
+    if ($user && $user->password === $credentials['password']) {
+        // Authentication passe...
+        return redirect()->intended('index');
     }
+
+    return back()->withErrors(['email' => 'Invalid email or  password']);
 }
+
+}
+
