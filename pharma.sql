@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
 -- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table pharmastock. gestionnare
-CREATE TABLE IF NOT EXISTS `gestionnare` (
+CREATE TABLE IF NOT EXISTS `gestionnaire` (
   `id_gestionnaire` int DEFAULT NULL,
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
