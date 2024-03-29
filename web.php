@@ -4,13 +4,32 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Gestionnaire;
-use App\Http\Controllers\GestionnaireController; // Assurez-vous d'inclure le contrôleur GestionnaireController
+use App\Http\Controllers\GestionnaireController;
+use App\Http\Controllers\ProductController;
+
+Route::get('/products', function () {
+    return view('products');
+})->name('products');;
+
+Route::get('/addproducts', function () {
+    return view('addproducts');
+})->name('addproducts');;
 
 Route::get('/login', function () {
     return view('login');
 });
+Route::get('/index', function () {
+    return view('index');
+})->name('index');;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+
+Route::post('/addproducts', [ProductController::class, 'store'])->name('products.store');
+
+
+Route::get('/products', [ProductController::class, 'index'])->name('products');
+
 
 Route::get('/header', function () {
     return view('header');
