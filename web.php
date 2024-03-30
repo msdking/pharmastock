@@ -15,6 +15,10 @@ Route::get('/addproducts', function () {
     return view('addproducts');
 })->name('addproducts');;
 
+Route::get('/staticproducts', function () {
+    return view('staticproducts');
+})->name('staticproducts');;
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -26,6 +30,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 Route::post('/addproducts', [ProductController::class, 'store'])->name('products.store');
+
+Route::get('/addproducts', [ProductController::class, 'create'])->name('addproducts.create');
 
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
