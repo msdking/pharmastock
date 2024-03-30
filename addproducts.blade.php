@@ -51,16 +51,24 @@
 
         <div class="card">
           <div class="card-body">
+            <br>
+          @if(session('success'))
+                            <div class="alert alert-success " role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
             <h5 class="card-title">Add Product</h5>
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
-                <label for="id_category">Category:</label>
-                <select class="form-control" id="id_category" name="id_category">
-                  <option value="">Select Category</option>
-                  <!-- You can populate options dynamically from your database if needed -->
-                </select>
-              </div>
+    <label for="id_category">Category:</label>
+    <select class="form-control" id="id_category" name="id_category">
+        <option value="">Select Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id_category }}">{{ $category->nom }}</option>
+        @endforeach
+    </select>
+</div>
               <br>
               <div class="form-group">
                 <label for="nom">Name:</label>
