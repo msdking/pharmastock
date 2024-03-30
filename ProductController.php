@@ -1,25 +1,33 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category; // Add this line to include the Category model
 
 class ProductController extends Controller
 {
-    // Method to display products
+    // Method to display add product form
+    public function create()
+    {
+        // Fetch all categories from the database
+        $categories = Category::all();
+
+        // Pass categories data to the view
+        return view('addproducts', compact('categories'));
+    }
     public function index()
     {
-        // Retrieve all products
-        $products = Product::all();
 
-        // Pass products data to the view
+        $products = Product::all();
         return view('products', compact('products'));
     }
+
 
     // Method to store new product
     public function store(Request $request)
     {
+        //dd($request->all());
         // Validate the incoming request data
         $validatedData = $request->validate([
             'id_category' => 'required|integer',
@@ -46,6 +54,7 @@ class ProductController extends Controller
         $product->quantite = $validatedData['quantite'];
         $product->date_expiration = $validatedData['date_expiration'];
         $product->photo = $validatedData['photo'] ?? null;
+        //dd($product);
         $product->save();
 
         // Redirect back or to any other page after successful submission
