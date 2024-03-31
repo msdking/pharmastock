@@ -6,6 +6,24 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Gestionnaire;
 use App\Http\Controllers\GestionnaireController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ClientController;
+
+
+
+Route::get('/listclients', function () {
+    return view('listclients');
+})->name('listclients');;
+
+Route::get('/listclients', [ClientController::class, 'index'])->name('listclients');
+
+Route::post('/addclients', [ClientController::class, 'store'])->name('clients.store');
+
+//Route::get('/addclients', [ProductController::class, 'create'])->name('addclients.create');
+
+Route::get('/addclients', function () {
+    return view('addclients');
+})->name('addclients');;
+
 
 Route::get('/products', function () {
     return view('products');
