@@ -1,0 +1,26 @@
+INSERT INTO category (nom, description) VALUES
+('Prescription Drugs', 'Medications that require a doctor\'s prescription');
+
+INSERT INTO category (nom, description) VALUES
+('Over-the-Counter Medications', 'Medications that can be purchased without a prescription');
+
+INSERT INTO category (nom, description) VALUES
+('Vitamins & Supplements', 'Products that provide essential nutrients');
+
+INSERT INTO category (nom, description) VALUES
+('Medical Supplies', 'Products used to diagnose, treat, or monitor medical conditions');
+
+INSERT INTO category (nom, description) VALUES
+('First Aid', 'Products used to provide immediate care for injuries or illnesses');
+
+INSERT INTO category (nom, description) VALUES
+('Beauty & Hygiene', 'Products used to maintain personal hygiene and appearance');
+
+INSERT INTO category (nom, description) VALUES
+('Baby Care', 'Products used to care for babies and infants');
+
+INSERT INTO category (nom, description) VALUES
+('Personal Care', 'Products used to maintain personal hygiene');
+
+INSERT INTO category (nom, description) VALUES
+('Home Healthcare', 'Products used to care for patients at home');
