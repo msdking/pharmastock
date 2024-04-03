@@ -33,6 +33,8 @@ Route::get('/addproducts', function () {
     return view('addproducts');
 })->name('addproducts');;
 
+
+
 Route::get('/staticproducts', function () {
     return view('staticproducts');
 })->name('staticproducts');;
@@ -51,6 +53,11 @@ Route::post('/addproducts', [ProductController::class, 'store'])->name('products
 
 Route::get('/addproducts', [ProductController::class, 'create'])->name('addproducts.create');
 
+Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+
+Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products');
 
@@ -59,6 +66,9 @@ Route::get('/header', function () {
     return view('header');
 })->name('header');
 
+Route::get('/pharmastock', function () {
+    return view('pharmastock');
+})->name('pharmastock');
 
 Route::get('/dbconn', function () {
     return view('dbconn');
