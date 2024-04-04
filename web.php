@@ -55,7 +55,9 @@ Route::get('/addproducts', [ProductController::class, 'create'])->name('addprodu
 
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
+
+//Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
