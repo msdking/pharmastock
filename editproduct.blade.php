@@ -59,9 +59,18 @@
                             </div>
                         @endif
             <h5 class="card-title">Edit Product</h5>
-            <form action="{{ route('products.update', ['id' => $product->id_product]) }}" method="POST" enctype="multipart/form-data">
-              @csrf
+            <form action="{{ route('products.update', ['product' => $product->id_product]) }}" method="POST" enctype="multipart/form-data">              @csrf
               @method('PUT')
+              <div class="form-group">
+    <label for="id_category">Category:</label>
+    <select class="form-control" id="id_category" name="id_category">
+        <option value="">Select Category</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id_category }}">{{ $category->nom }}</option>
+        @endforeach
+    </select>
+</div>
+<br>
               <div class="form-group">
                 <label for="nom">Name:</label>
                 <input type="text" class="form-control" id="nom" name="nom" value="{{ $product->nom }}" required>
@@ -90,7 +99,7 @@
               <div class="form-group">
                  <label for="photo">Photo:</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="photo" name="photo">
+                    <input type="file" class="custom-file-input" id="photo" name="photo" value="{{ $product->photo}}">
                     <label class="custom-file-label" for="photo">Choose file</label>
                 </div>
             </div>
