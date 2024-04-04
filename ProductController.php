@@ -20,7 +20,9 @@ class ProductController extends Controller
     {
 
         $products = Product::all();
-        return view('products', compact('products'));
+       //$product = $products->first(); // Get the first product from the collection
+       //dd($product->getAttributes()); // Dump the product's attributes
+       return view('products', compact('products'));
     }
 
 
@@ -59,5 +61,70 @@ class ProductController extends Controller
 
         // Redirect back or to any other page after successful submission
         return redirect()->back()->with('success', 'Product added successfully!');
+    }
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('editproduct', compact('product', 'categories'));
+    }
+
+    // Method to update product
+    // Method to update product
+    public function update(Request $request, $id)
+
+{
+    //dd('Update method called'); // Add this line
+
+    // Validate the incoming request data
+    $validatedData = $request->validate([
+        'id_category' => 'required|integer',
+        'nom' => 'required|string|max:100',
+        'description' => 'nullable|string',
+        'prix_u' => 'required|numeric',
+        'quantite' => 'nullable|integer',
+        'date_expiration' => 'nullable|date',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
+    ]);
+    //dd($validatedData); // Add this line to check validated data
+
+
+    try {
+        // Fetch the product to update
+        $product = Product::findOrFail($id);
+
+        // Fill the product with new data
+        $product->id_category = $validatedData['id_category'];
+        $product->nom = $validatedData['nom'];
+        $product->description = $validatedData['description'];
+        $product->prix_u = $validatedData['prix_u'];
+        $product->quantite = $validatedData['quantite'];
+        $product->date_expiration = $validatedData['date_expiration'];
+
+        // Handle photo upload if provided
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $product->photo = $photoPath;
+        }
+
+        // Save the changes
+        $product->save();
+
+        // Redirect back or to any other page after successful update
+        return redirect()->back()->with('success', 'Product updated successfully!');
+    } catch (\Exception $e) {
+        // Log or handle the error appropriately
+        return redirect()->back()->with('error', 'Failed to update product. Please try again.');
+    }
+    dump($validatedData); // Add this line to check validated data
+
+}
+
+    // Method to delete product
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->back()->with('success', 'Product deleted successfully!');
     }
 }
