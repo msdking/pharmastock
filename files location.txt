@@ -1,0 +1,4 @@
+li fihom controller yjiw f dossier  app\Http\Controllers
+li fihom table yjiw f dossier     database\migrations
+li fihom blade yjiw f dossier    resources\views
+li ma fihom walou yjiw f dossier   app\Models
