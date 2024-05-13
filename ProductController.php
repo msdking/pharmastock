@@ -16,15 +16,8 @@ class ProductController extends Controller
         // Pass categories data to the view
         return view('addproducts', compact('categories'));
     }
-    public function index()
-    {
-
-        $products = Product::all();
-       //$product = $products->first(); // Get the first product from the collection
-       //dd($product->getAttributes()); // Dump the product's attributes
-       return view('products', compact('products'));
-    }
-
+    
+    
 
     // Method to store new product
     public function store(Request $request)
@@ -42,9 +35,13 @@ class ProductController extends Controller
         ]);
 
         // Handle photo upload if provided
+    
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $validatedData['photo'] = $photoPath;
+            $photo = $request->file('photo');
+            $photoName = $photo->getClientOriginalName(); // Get the original filename
+            $photoPath = $photo->storeAs('assets/img', $photoName, 'public');
+            $filename = pathinfo($photoPath, PATHINFO_BASENAME); // Extract just the filename
+            $validatedData['photo'] = $filename;
         }
 
         // Create a new product instance
@@ -123,8 +120,13 @@ class ProductController extends Controller
     // Method to delete product
     public function destroy($id)
     {
+
+         echo $id;
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully!');
     }
+
+
+
 }

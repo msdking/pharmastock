@@ -7,6 +7,11 @@ use App\Models\Gestionnaire;
 use App\Http\Controllers\GestionnaireController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index']);
+
 
 
 
@@ -29,15 +34,38 @@ Route::get('/products', function () {
     return view('products');
 })->name('products');;
 
+
+
 Route::get('/addproducts', function () {
     return view('addproducts');
 })->name('addproducts');;
+
+Route::get('/home/all_products', function () {
+    return view('all_products');
+})->name('all_products');;
+
+
+
+
 
 
 
 Route::get('/staticproducts', function () {
     return view('staticproducts');
 })->name('staticproducts');;
+
+
+Route::get('/daysales', function () {
+    return view('daysales');
+})->name('daysales');;
+
+Route::get('/weeksales', function () {
+    return view('weeksales');
+})->name('weeksales');;
+
+Route::get('/monthsales', function () {
+    return view('monthsales');
+})->name('monthsales');;
 
 Route::get('/login', function () {
     return view('login');
@@ -47,6 +75,15 @@ Route::get('/index', function () {
 })->name('index');;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+Route::get('/profile', [GestionnaireController::class, 'showProfile'])->name('profile');
+
+Route::put('/profile', [GestionnaireController::class, 'updateProfile'])->name('profile');
+
+Route::put('/profile', [GestionnaireController::class, 'changePassword'])->name('profile');
 
 
 Route::post('/addproducts', [ProductController::class, 'store'])->name('products.store');
@@ -61,12 +98,33 @@ Route::put('/products/{product}/update', [ProductController::class, 'update'])->
 
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products');
+//Route::delete('/products/{id}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
+Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
+
+Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
+
+Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
+
+
+//Route::get('/products', [ProductController::class, 'index'])->name('products');
+
+Route::get('/details', function () {
+    return view('details');
+})->name('details');
 
 
 Route::get('/header', function () {
     return view('header');
 })->name('header');
+
+Route::get('/listorder', function () {
+    return view('listorder');
+})->name('listorder');
+
+Route::get('/listorder', [OrderController::class, 'index'])->name('listorder');
+
 
 Route::get('/pharmastock', function () {
     return view('pharmastock');
@@ -76,24 +134,18 @@ Route::get('/dbconn', function () {
     return view('dbconn');
 });
 
-Route::get('/hash-passwords', function () {
+Route::get('/product_detailes/{id_product}',[HomeController::class,'product_detailes']);
 
-    $users = Gestionnaire::all();
-    // Add debugging
-    //dd($users);
-
-    if ($users) {
-        // Iterate over users (if any)
-        foreach ($users as $user) {
-            // Hash the password
-            $user->password = bcrypt($user->password);
-            $user->save();
-        }
-        return 'Passwords updated successfully!';
-    } else {
-        return 'No users found with the given condition.';
-    }
+Route::get('/Product_category', function () {
+    return view('home.Product_category');
 });
+
+Route::get('/Product_category/{nom}', [HomeController::class, 'Product_category'])->name('Product_category');
+
+
+Route::get('/about',[HomeController::class,'about']);
+Route::get('/contact',[HomeController::class,'contact']);
+
 
 
  //

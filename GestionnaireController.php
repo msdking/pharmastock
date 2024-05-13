@@ -23,15 +23,15 @@ class GestionnaireController extends Controller
     public function updateProfile(Request $request)
 {
     $gestionnaire = Session::get('gestionnaire');
-    $id=$gestionnaire->id;
+    $id = $gestionnaire->id;
+
     // Validate form data
     $request->validate([
         'nom' => 'required|string|max:50',
         'prenom' => 'required|string|max:50',
-        'email' => 'required|string|email|max:50|unique:gestionnaires,email,' . $gestionnaire->id,
-        'password' => 'nullable|string|min:6',
-        'tel' => 'nullable|string|max:20',
-        'address' => 'nullable|string|max:255',
+        'email' => 'required|string|email|max:50|unique:gestionnaires,email,' . $id,
+        'tel' => 'nullable|string|max:20', // Update validation rules for tel
+        'address' => 'nullable|string|max:255', // Update validation rules for address
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         'civilite' => 'nullable|string|max:255',
     ]);
@@ -48,6 +48,10 @@ class GestionnaireController extends Controller
         $gestionnaire->photo = $photoPath;
     }
 
+    // Update address and tel fields
+    $gestionnaire->address = $request->address;
+    $gestionnaire->tel = $request->tel;
+
     // Save the updated gestionnaire data
     $gestionnaire->save();
 
@@ -57,7 +61,29 @@ class GestionnaireController extends Controller
     // Redirect back with success message
     return redirect()->back()->with('success', 'Profile updated successfully!');
 }
+public function changePassword(Request $request)
+{
+    $request->validate([
+        'currentPassword' => 'required',
+        'newPassword' => 'required|min:8|different:currentPassword',
+        'renewPassword' => 'required|same:newPassword',
+    ]);
+
+    $currentUser = Session::get('gestionnaire');
+
+    if ($currentUser['password'] !== $request->currentPassword) {
+        return redirect()->back()->withErrors(['currentPassword' => 'The current password is incorrect.']);
+    }
+
+    // Update the password in session
+    $currentUser['password'] = $request->newPassword;
+    Session::put('gestionnaire', $currentUser);
+
+    return redirect()->route('profile')->with('success', 'Password changed successfully.');
 }
+
+}
+
 
 
 

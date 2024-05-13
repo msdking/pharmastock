@@ -42,7 +42,16 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Invalid email or password']);
     }
 
-        
+public function logout(Request $request)
+{
+    // Remove the authenticated user data from the session
+    $request->session()->forget('gestionnaire');
+    // Redirect the user to the login page or any other desired location
+    return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+}
+
+
+
  }
 
 
