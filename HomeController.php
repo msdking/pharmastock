@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Client;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,11 @@ class HomeController extends Controller
        $product = Product::paginate(10);
         return view('home.userpage', compact('product'));
     }
-
+    public function grade()
+    {
+       $client = DB::table('Clients')->where('id_client',1)->first();
+        return view('home.headerhome', compact('client'));
+    }
     public function product_detailes($id_product)  {
         $product=Product::find($id_product);
         $category = $product->id_category;
