@@ -2,153 +2,65 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Gestionnaire;
-use App\Http\Controllers\GestionnaireController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/index', function () {
+    return view('index');
+})->middleware('auth');
 
+Route::get('/categories', function () {
+    return view('categories');
+});
 
+Route::get('/inscription', function () {
+    return view('inscription');
+});
 
-Route::get('/listclients', function () {
-    return view('listclients');
-})->name('listclients');;
+Route::get('/sales', function () {
+    return view('sales');
+});
 
-Route::get('/listclients', [ClientController::class, 'index'])->name('listclients');
+Route::get('/tables-data', function () {
+    return view('tables-data');
+});
 
-Route::post('/addclients', [ClientController::class, 'store'])->name('clients.store');
+Route::get('/tables-general', function () {
+    return view('tables-general');
+})->name('tables-general');
 
-//Route::get('/addclients', [ProductController::class, 'create'])->name('addclients.create');
-
-Route::get('/addclients', function () {
-    return view('addclients');
-})->name('addclients');;
-
-
-Route::get('/products', function () {
-    return view('products');
-})->name('products');;
-
-
-
-Route::get('/addproducts', function () {
-    return view('addproducts');
-})->name('addproducts');;
-
-Route::get('/home/all_products', function () {
-    return view('all_products');
-})->name('all_products');;
-
-
-
-
-
-
-
-Route::get('/staticproducts', function () {
-    return view('staticproducts');
-})->name('staticproducts');;
-
-
-Route::get('/daysales', function () {
-    return view('daysales');
-})->name('daysales');;
-
-Route::get('/weeksales', function () {
-    return view('weeksales');
-})->name('weeksales');;
-
-Route::get('/monthsales', function () {
-    return view('monthsales');
-})->name('monthsales');;
+Route::get('/user-profile', function () {
+    return view('user-profile');
+});
 
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/index', function () {
-    return view('index');
-})->name('index');;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+Route::post('/tables-data', [AuthController::class, 'store'])->name('tables-data');
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-Route::get('/profile', [GestionnaireController::class, 'showProfile'])->name('profile');
+Route::get('/inscription', [AuthController::class, 'create'])->name('inscription');
 
-Route::put('/profile', [GestionnaireController::class, 'updateProfile'])->name('profile');
+Route::post('/index', [AuthController::class, 'store'])->name('index');
 
-Route::put('/profile', [GestionnaireController::class, 'changePassword'])->name('profile');
+Route::post('/tables-data', [AuthController::class, 'cree'])->name('tables-data');
 
+Route::get('/tables-general', [AuthController::class, 'index'])->name('tables-general');
 
-Route::post('/addproducts', [ProductController::class, 'store'])->name('products.store');
+Route::put('/update', [AuthController::class, 'update'])->name('update');
 
-Route::get('/addproducts', [ProductController::class, 'create'])->name('addproducts.create');
+Route::delete('/tables-general/{type}/{id}', [AuthController::class, 'destroy'])->name('tables-general.destroy');
 
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::get('/tables-general/{type}/edit', [AuthController::class, 'edit'])->name('tables-general.edit');
 
-Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('products.update');
-
-//Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-
-Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-
-//Route::delete('/products/{id}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
-
-
-Route::get('/clients/{id}/edit', [ClientController::class, 'edit'])->name('clients.edit');
-
-Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
-
-Route::delete('/clients/{id}', [ClientController::class, 'destroy'])->name('clients.destroy');
-
-
-//Route::get('/products', [ProductController::class, 'index'])->name('products');
-
-Route::get('/details', function () {
-    return view('details');
-})->name('details');
-
-
-Route::get('/header', function () {
-    return view('header');
-})->name('header');
-
-Route::get('/listorder', function () {
-    return view('listorder');
-})->name('listorder');
-
-Route::get('/listorder', [OrderController::class, 'index'])->name('listorder');
-
-
-Route::get('/pharmastock', function () {
-    return view('pharmastock');
-})->name('pharmastock');
-
-Route::get('/dbconn', function () {
-    return view('dbconn');
-});
-
-Route::get('/product_detailes/{id_product}',[HomeController::class,'product_detailes']);
-
-Route::get('/Product_category', function () {
-    return view('home.Product_category');
-});
-
-Route::get('/Product_category/{nom}', [HomeController::class, 'Product_category'])->name('Product_category');
-
-
-Route::get('/about',[HomeController::class,'about']);
-Route::get('/contact',[HomeController::class,'contact']);
-
-
-
- //
-//hada bach ki dir localhost/login tetl3lk page login kima f localhost/login.php hna khes hta dir hed route bch tle3
+Route::put('/tables-general/{type}/update', [AuthController::class, 'update'])->name('tables-general.update');
 
 
