@@ -11,10 +11,12 @@
           @foreach($product as $product)
 
           <div class="col-sm-6 col-md-4 col-lg-4">
-            <a > <img src="{{ asset('assets/img/' . $product->photo) }}" alt="Image" accept=".png,.jpg,.jpeg,.gif,.bmp,.tif,.tiff,.webp,.svg,.ico,.cur"></a>
+          <a href="{{url('product_detailes',$product->id_product)}}" target="_blank">
+              <img src="{{ asset('assets/images/'.$product->photo) }}" alt="Image">
+          </a>
             
-            <h3 class="text-dark">
-              <a href="{{url('product_detailes',$product->id_product)}}">{{$product->nom}}</a></h3>
+            <h2 class="text-dark">
+              <a href="{{url('product_detailes',$product->id_product)}}" target=_blank>{{$product->nom}}</a></h2>
             <p class="price"> {{$product->prix_u}} DA</p>
           </div>
           @endforeach

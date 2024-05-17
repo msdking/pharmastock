@@ -34,12 +34,18 @@
           <li><a href="{{url('/about')}}">About</a></li>
           <li><a href="{{url('/contact')}}">Contact</a></li>
         </ul>
+    
+        </ul>
       </nav>
     </div>
     <div class="icons">
-      <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-      <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-          class="icon-menu"></span></a>
+      <a href="#"> 
+      <img src="images\prf.png" alt="Pharma logo" class="logo-img">  &nbsp; &nbsp;  
+       <a> grade</a>
+      </a>
+      
+    
+      
     </div>
   </div>
 </div>

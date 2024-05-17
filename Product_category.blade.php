@@ -3,6 +3,8 @@
 <head>
   
   <title>Pharmastock</title>
+  <link rel="shortcut icon" type="image/png" href="images\logoo.png">
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
@@ -32,8 +34,8 @@
          <p>Catégory : {{$categories->nom}}</p>
 
                 foreach($product as $product)
-          <div class="img-box" style="padding : 25px">
-<img src="C:\xampp\htdocs\projet\public\images\{{$product->photo}}" alt="Image" accept=".png,.jpg,.jpeg,.gif,.bmp,.tif,.tiff,.webp,.svg,.ico,.cur"></div>
+              <div class="img-box" style="padding : 25px">
+                   <img src="{{ asset('assets/images/'.$product->photo) }}" alt="Image" accept=".png,.jpg,.jpeg,.gif,.bmp,.tif,.tiff,.webp,.svg,.ico,.cur"></div>
             
             <h2>{{ $product->nom }}</h2>
             <p>Description: {{ $product->description }}</p>

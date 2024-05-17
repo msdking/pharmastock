@@ -9,6 +9,8 @@
 <head>
     <base href="/public">
   <title>Pharmastock</title>
+  <link rel="shortcut icon" type="image/png" href="images\logoo.png">
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,21 +36,17 @@
 
    @include('home.headerhome')
 </div>
-<div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50% ; padding: 30px">
-          
-<div class="img-box" style="padding : 25px">
-
-    <img src="C:/xampp/htdocs/projet/public/images/{{ $product->photo }}" alt="Image">
+<div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width: 50%; padding: 30px">
+  <div class="img-box">
+    <img src="{{ asset('assets/images/' . $product->photo) }}" alt="Image" class="img-fluid">
+  </div>
+  <h3>
+    {{$product->nom}}
+  </h3>
+  <h6>Produit catégories : {{$product->id_category}} </h6>
+  <h6> Produit prix :{{$product->prix_u}} DA</h6>
+  <h6>Produit decription : {{$product->description}} </h6>
 </div>
-            <h3>
-              {{$product->nom}}</h3>
-              <h6>Produit catégories : {{$product->id_category}} </h6>
-            <h6> Produit prix :{{$product->prix_u}} DA</h6>
-            <h6>Produit decription : {{$product->description}} </h6>
-            
-
-
-          </div>
 
 
    @include('home.fotter')
