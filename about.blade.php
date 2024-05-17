@@ -3,6 +3,8 @@
 <head>
 
 <title>À Propos de Pharmastock</title>
+<link rel="shortcut icon" type="image/png" href="images\logoo.png">
+
             <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,6 +21,63 @@
   <link rel="stylesheet" href="home/css/aos.css">
 
   <link rel="stylesheet" href="home/css/style.css">
+  <style>
+        
+        .h10 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* styles pour les sous-titres */
+.h {
+  font-size: 18px;
+  margin-top: 2rem;
+  align-items: center;
+  text-align: center;
+}
+
+/* styles pour le paragraphe principal */
+.p0 {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 1rem;
+  color: black;
+  opacity: 2;
+}
+
+/* styles pour la liste à puces */
+.ul0 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
+/* styles pour les éléments de liste */
+.li0 {
+  margin-bottom: 0.8rem;
+  font-size: smaller;
+  display: inline-flex;
+  color: black;
+}
+.TOUTSS{
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  background-color:#CEDACF;
+}
+.tou1{
+  margin: 10px;
+  font-size: 15px;
+  width: 50%;
+  padding: 25px;
+  background: blanchedalmond;
+  opacity: 0.9;
+
+}
+
+      </style>
 
 </head>
 
@@ -45,7 +104,11 @@
                 <li class="li0">Service Clientèle Exceptionnel : Notre équipe de service clientèle est disponible pour répondre à toutes vos questions et préoccupations.</li>
             </ul>
         </div>
+    
     </div>
+    
+
+</video>
 
 @include('home.fotter')
 

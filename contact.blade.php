@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Coordonnées</title>
+    <link rel="shortcut icon" type="image/png" href="images\logoo.png">
+
     <link rel="stylesheet" type="text/css" >
     <style>
   /* CSS pour la page Coordonnées */
@@ -157,20 +159,11 @@ button.contact_form_submit {
                                     <div class="contact_field">
                                         <h3>Contatc Us</h3>
                                         <p>Feel Free to contact us any time. We will get back to you as soon as we can!.</p>
-                                        
+                                        <a href="{{ route('emails') }}">Envoyer un e-mail à l'administrateur</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="right_conatct_social_icon d-flex align-items-end">
-                                   <div class="socil_item_inner d-flex">
-                                   
-                                      <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                                      <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                      <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                   </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="contact_info_sec">
                             <h4 class="collor">Contact Info</h4>
