@@ -1,9 +1,13 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Vent;
 use App\Models\Category; // Add this line to include the Category model
+use App\Models\Gestionnaire; // Add this line to include the Category model
+
 
 class ProductController extends Controller
 {
@@ -16,8 +20,15 @@ class ProductController extends Controller
         // Pass categories data to the view
         return view('addproducts', compact('categories'));
     }
-    
-    
+    public function index()
+    {
+
+        $products = Product::all();
+       //$product = $products->first(); // Get the first product from the collection
+       //dd($product->getAttributes()); // Dump the product's attributes
+       return view('products', compact('products'));
+    }
+
 
     // Method to store new product
     public function store(Request $request)
@@ -34,8 +45,6 @@ class ProductController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max file size as needed
         ]);
 
-        // Handle photo upload if provided
-    
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $photoName = $photo->getClientOriginalName(); // Get the original filename
@@ -55,7 +64,14 @@ class ProductController extends Controller
         $product->photo = $validatedData['photo'] ?? null;
         //dd($product);
         $product->save();
-
+        $vent = new Vent();
+        $vent->id_product = $product->id_product; // Assuming the 'products' table uses 'id' as the primary key
+        $vent->quantite = $validatedData['quantite'];
+        $vent->id_client = null; // You might want to set this appropriately
+        $vent->date = now(); // Current timestamp
+        $vent->type = 'achat';
+        // Save the vent
+        $vent->save();
         // Redirect back or to any other page after successful submission
         return redirect()->back()->with('success', 'Product added successfully!');
     }
@@ -100,9 +116,14 @@ class ProductController extends Controller
 
         // Handle photo upload if provided
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $product->photo = $photoPath;
+            $photo = $request->file('photo');
+            $photoName = $photo->getClientOriginalName(); // Get the original filename
+            $photoPath = $photo->storeAs('assets/img', $photoName, 'public');
+            $filename = pathinfo($photoPath, PATHINFO_BASENAME); // Extract just the filename
+            $product->photo = $filename;
         }
+
+
 
         // Save the changes
         $product->save();
@@ -123,10 +144,9 @@ class ProductController extends Controller
 
          echo $id;
         $product = Product::findOrFail($id);
+        $product->ventss()->delete();
+
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully!');
     }
-
-
-
 }
