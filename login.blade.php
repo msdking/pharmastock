@@ -36,6 +36,13 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <!--<style>
+   body{
+        background-image: url('assets/img/backpharma.png');
+    background-size: cover;
+    background-position: center;
+    }-->
+  </style>
 </head>
 
 <body>
@@ -49,9 +56,9 @@
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
               <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                <a href="index.html" class="logo d-flex align-items-center w-auto ">
                   <img src="assets/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">NiceAdmin</span>
+
                 </a>
               </div><!-- End Logo -->
 
@@ -88,19 +95,21 @@
         </div>
     </div>
     <div class="col-12">
-        <button class="btn btn-primary w-100" type="submit">Login</button>
+        <button class="btn btn-primary w-100 "style="background-color:#2b7232" type="submit">Login</button>
     </div>
-</form>
-
+    <br/>
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
+    <div class="alert alert-danger text-danger " style="background-color: transparent; border:0cap"  >
+        <ul >
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
 @endif
+
+</form>
+
 
 
                 </div>
@@ -135,3 +144,7 @@
 </body>
 
 </html>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
